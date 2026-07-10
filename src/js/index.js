@@ -157,14 +157,28 @@ function add2HoursToTime(date) {
     }
 }
 
-function tableEntry(name, timeIn, timeOut) {
+// remove the entry from the table by stopping the timer and deleting it from the table
+function removeEntry(btnElement, elapsedTimerId) {
+    // stop the timer
+    clearInterval(elapsedTimerId)
+
+    // <tr> -> <td> -> <button>
+    $(btnElement).parent().parent().remove()
+}
+
+
+function tableEntry(name, timeIn, timeOut, elapsedTimer) {
     let idName = removeWhitespace(name)
+
     return `
         <tr>
             <td id="name">${name}</td>
             <td id="timeIn">${timeIn}</td>
             <td id="timeOut">${timeOut}</td>
             <td id="${idName}-timeElapsed">00:00:00</td>
+            <td id="${idName}-btn">
+                <button id="${idName}-btn" onclick="removeEntry(this, ${elapsedTimer._intervalId})">Remove</button>
+            </td>
         </tr>
     `
 }
@@ -203,7 +217,7 @@ function removeWhitespace(name) {
 }
 
 function submitNewEntry() {
-    let newName = NEW_ENTRY_NAME.val();
+    let newName = NEW_ENTRY_NAME.val().trim();
     let newTimeIn = getCurrentTime()
     let newTimeOut = add2HoursToTime(newTimeIn.date)
 
@@ -247,17 +261,18 @@ function submitNewEntry() {
         // }
     }
 
+    let idName = removeWhitespace(newName)
+    let eT = new ElapsedTime(idName)
+    eT.startTimer()
+
     SCHEDULE_TABLE.append(
         tableEntry(
             newName,
             newTimeIn.time,
-            newTimeOut.time
+            newTimeOut.time,
+            eT
         )
     )
-
-    let idName = removeWhitespace(newName)
-    let eT = new ElapsedTime(idName)
-    eT.startTimer()
 
     // clear fields
     NEW_ENTRY_NAME.val("")
