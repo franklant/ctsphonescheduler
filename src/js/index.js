@@ -8,6 +8,7 @@ const ERROR_ELEMENT = $("#error")
 const SCHEDULE_TABLE = $("#schedule-table")
 
 // TODO: figure out how to save information
+// TODO: fix error where whitespace can be submitted as an entry name. Needs letter or characters.
 class ElapsedTime {
     // the date object used to manipulate and show elapsed time
     _dateObject = null;
