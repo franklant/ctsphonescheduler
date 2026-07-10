@@ -224,7 +224,7 @@ function submitNewEntry() {
     const WHITE_SPACE_REGX = /^\s+/
     const SPECIAL_CHARACTER_REGX = /[^a-zA-Z0-9\s]/
 
-    if (newName.match(WHITE_SPACE_REGX)) {
+    if (newName.match(WHITE_SPACE_REGX) || newName === "") {
         showError("One or more fields are empty.", "red")
         return
     }
