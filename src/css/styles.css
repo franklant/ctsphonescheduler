@@ -1,0 +1,37 @@
+body {
+    font-family: Arial, "Droid Serif";
+    font-size: 15px;
+}
+
+#new-entry-form {
+    margin: 10px 0 10px 0;
+}
+
+#nav {
+    padding-left: 5px;
+    background-color: #babaff;
+}
+
+#nav > a {
+    text-decoration: none;
+    padding: 15px 10px 15px 10px;
+}
+
+#nav > a:hover {
+    /* Hover state */
+    background-color: #a7a7e8;
+}
+
+#nav > a:active {
+    /* Active state */
+    background-color: #7b7bae;
+    color: white;
+}
+
+table, th, td {
+    padding: 5px 50px 5px 50px;
+    border: 2px solid black;
+    border-collapse: collapse;
+
+    text-align: center;
+}

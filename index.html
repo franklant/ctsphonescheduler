@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-4.0.0.js" integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./src/css/styles.css">
+    <title>CTS Phone Scheduler</title>
+</head>
+<body>
+<!--Page is now running...-->
+    <div id="nav">
+        <p style="display: inline-block; margin-right: 10px;">*beta CTS PHONE SCHEDULER</p>
+<!--        <a href="">Home</a>-->
+        <a href="https://github.com/franklant/" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/franklant/" target="_blank">LinkedIn</a>
+    </div>
+    <div id="new-entry-form">
+        <fieldset>
+            <legend>New Sign-In</legend>
+            <form id="new-entry">
+                <label for="new-entry-name">Name</label>
+                <input type="text" id="new-entry-name" placeholder="Enter Name">
+<!--                <label for="new-entry-time-in">Time-In</label>-->
+<!--                <input type="text" id="new-entry-time-in" placeholder="Enter Time">-->
+                <input type="button" id="sign-in-btn" value="Sign In">
+                <input type="button" id="clear-error-btn" value="Hide Message">
+            </form>
+            <p id="error"></p>
+        </fieldset>
+    </div>
+    <div id="content">
+        <table id="schedule-table">
+            <tr>
+                <th>Name</th>
+                <th>Time-In</th>
+                <th>Time-Out</th>
+                <th>Time Elapsed</th>
+            </tr>
+        </table>
+    </div>
+    <script src="./src/js/index.js"></script>
+</body>
+</html>
