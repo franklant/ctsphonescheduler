@@ -33,7 +33,7 @@ class ElapsedTime {
 
         this._counter = 0
 
-        this._name = name
+        this._name = removeWhitespace(name)
         // this._elapsedDomID = domID
     }
 
@@ -64,6 +64,7 @@ class ElapsedTime {
                 let dateTime = this._dateObject.toTimeString().substring(0, 9)
 
                 let ENTRY_TIME_ELAPSED = $(`#${this._name}-timeElapsed`)
+
                 ENTRY_TIME_ELAPSED.html(dateTime)
 
                 // stop timer once 2 hours are reached
@@ -157,12 +158,13 @@ function add2HoursToTime(date) {
 }
 
 function tableEntry(name, timeIn, timeOut) {
+    let idName = removeWhitespace(name)
     return `
         <tr>
             <td id="name">${name}</td>
             <td id="timeIn">${timeIn}</td>
             <td id="timeOut">${timeOut}</td>
-            <td id="${name}-timeElapsed">00:00:00</td>
+            <td id="${idName}-timeElapsed">00:00:00</td>
         </tr>
     `
 }
@@ -183,13 +185,38 @@ function clearError() {
     CLEAR_ERROR_BTN.hide()
 }
 
+// remove whitespace from the name and replace it with a dash (-)
+// return that new string
+function removeWhitespace(name) {
+    let splitName = name.split(" ")
+    let reformattedName = ""
+
+    for (let i = 0; i < splitName.length; i++) {
+        if (i !== splitName.length - 1) {
+            reformattedName += splitName[i] + "-"
+        } else {
+            reformattedName += splitName[i]
+        }
+    }
+
+    return reformattedName
+}
+
 function submitNewEntry() {
     let newName = NEW_ENTRY_NAME.val();
     let newTimeIn = getCurrentTime()
     let newTimeOut = add2HoursToTime(newTimeIn.date)
 
-    if (newName === "") {
+    const WHITE_SPACE_REGX = /^\s+/
+    const SPECIAL_CHARACTER_REGX = /[^a-zA-Z0-9\s]/
+
+    if (newName.match(WHITE_SPACE_REGX)) {
         showError("One or more fields are empty.", "red")
+        return
+    }
+
+    if (newName.match(SPECIAL_CHARACTER_REGX)) {
+        showError("Name cannot contain special characters.", "red")
         return
     }
 
@@ -228,7 +255,8 @@ function submitNewEntry() {
         )
     )
 
-    let eT = new ElapsedTime(newName)
+    let idName = removeWhitespace(newName)
+    let eT = new ElapsedTime(idName)
     eT.startTimer()
 
     // clear fields
