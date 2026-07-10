@@ -203,7 +203,7 @@ function removeWhitespace(name) {
 }
 
 function submitNewEntry() {
-    let newName = NEW_ENTRY_NAME.val();
+    let newName = NEW_ENTRY_NAME.val().trim();
     let newTimeIn = getCurrentTime()
     let newTimeOut = add2HoursToTime(newTimeIn.date)
 
