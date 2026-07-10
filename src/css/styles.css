@@ -3,6 +3,10 @@ body {
     font-size: 15px;
 }
 
+input {
+    font-size: 15px;
+}
+
 #new-entry-form {
     margin: 10px 0 10px 0;
 }
