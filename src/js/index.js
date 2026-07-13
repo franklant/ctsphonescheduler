@@ -162,8 +162,11 @@ function removeEntry(btnElement, elapsedTimerId) {
     // stop the timer
     clearInterval(elapsedTimerId)
 
-    // <tr> -> <td> -> <button>
-    $(btnElement).parent().parent().remove()
+    // make sure the user would like to remove the entry
+    if (confirm("Are you sure?")) {
+        // <tr> <- <td> <- <button>
+        $(btnElement).parent().parent().remove()
+    }
 }
 
 
